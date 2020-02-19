@@ -16,19 +16,24 @@ app.use("/login", express.static(publicDirectoryPath));
 app.get("/", (req, res) => res.send("Main-Server"));
 
 app.get("/launch-application", async (req, res) => {
-  const { code } = req.query;
+  try {
+    const { code } = req.query;
 
-  if (code === "123") {
-    const response = await axios.get("http://localhost:6000/hit-service", {
-      params: { code }
-    });
-    if (response.data.result === "success") {
-      res.redirect(`/application?code=${code}`);
+    if (code === "123") {
+      const response = await axios.get("http://localhost:6000/hit-service", {
+        params: { code }
+      });
+      if (response.data.result === "success") {
+        res.redirect(`/application?code=${code}`);
+      } else {
+        res.status(400).send();
+      }
     } else {
-      res.status(400).send();
+      res.send(`Incorrect Code: ${code}`);
     }
-  } else {
-    res.send(`Incorrect Code: ${code}`);
+  } catch (e) {
+    console.log(e);
+    res.send(e);
   }
 });
 
