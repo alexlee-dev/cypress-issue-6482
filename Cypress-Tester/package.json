@@ -1,0 +1,17 @@
+{
+  "name": "cypress-tester",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "install-all": "node install-all.js",
+    "start": "node do-build-and-start-servers.js",
+    "cypress-run": "cypress run"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cypress": "^4.0.2"
+  }
+}
